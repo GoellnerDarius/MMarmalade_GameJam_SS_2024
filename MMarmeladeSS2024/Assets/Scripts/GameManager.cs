@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
 
-        if(scene.name == gameSceneName||true) 
+        if(scene.name == gameSceneName) 
 		{
             foreach (var device in InputSystem.devices)
             {
