@@ -8,14 +8,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public string gameSceneName;
-    public Vector2[] playerSpawns = new Vector2[4];
+    public Vector3[] playerSpawns = new Vector3[4];
     public int playerCount = 2;
     public GameObject[] playerReferences;
-    // I used here RuntimeAnimatorController to support AnimatorController and AnimatorOverrideController
-    public RuntimeAnimatorController[] playerAnimatorController = new RuntimeAnimatorController[4];
-
     public List<InputDevice> inputDevices = new List<InputDevice>();
-
+    public GameObject playerPrefab;
 
     void Awake()
     {
@@ -27,6 +24,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        gameObject.GetComponent<PlayerInputManager>().playerPrefab = playerPrefab;
     }
 
     void OnEnable()
@@ -36,13 +35,13 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-
         if(scene.name == gameSceneName) 
 		{
             foreach (var device in InputSystem.devices)
             {
                 if (device is Gamepad gamepad)
                 {
+                    Debug.Log(device);
                     if(!inputDevices.Contains(device))
                         inputDevices.Add(device);
                 }
@@ -50,8 +49,10 @@ public class GameManager : MonoBehaviour
 
             playerCount = inputDevices.Count;
             playerReferences = new GameObject[playerCount];
+            Debug.Log("PlayerCount: " + playerCount);
 			for(int i = 0; i < playerCount; i++)
-            {   
+            {
+                Debug.Log("Joining Player with id: " + i);
                 gameObject.GetComponent<PlayerInputManager>().JoinPlayer(i, -1, null, inputDevices[i]);
             }
 
@@ -61,17 +62,8 @@ public class GameManager : MonoBehaviour
             {
                 playerReferences[i].transform.position = playerSpawns[i];
                 playerReferences[i].GetComponent<PlayerInformation>().playerID = i;
-                playerReferences[i].GetComponent<Animator>().runtimeAnimatorController = playerAnimatorController[i];
             }
             PointsManager.Start();
 		}
     }
-
-    public void PlayGameMusic()
-    {
-    }
-
-
-
-
 }

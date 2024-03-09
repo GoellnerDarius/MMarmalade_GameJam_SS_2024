@@ -15,12 +15,9 @@ public class PlayerJumpController : MonoBehaviour
     void Update()
     {
         //todo remove
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = UnityEngine.Input.GetAxis("Horizontal");
+        float verticalInput = UnityEngine.Input.GetAxis("Vertical");
         transform.Translate(Vector3.right * (_speed * horizontalInput * Time.deltaTime));
         transform.Translate(Vector3.forward * (_speed * verticalInput * Time.deltaTime)); 
-        
-        
-        
     }
 }

@@ -21,17 +21,18 @@ public class PlayerMovement : MonoBehaviour
         playerInput = new Input();
         characterController = GetComponent<CharacterController>();
 
+/*
         //Move Input Pressed callback
-        playerInput.CharacterControls.Move.started += onMovementInput;
+        playerInput.CharacterControls.Move.started += OnMovementInput;
         
         //Move Input canceled callback
-        playerInput.CharacterControls.Move.canceled += onMovementInput;
+        playerInput.CharacterControls.Move.canceled += OnMovementInput;
         
         //Move Input finished callback
-        playerInput.CharacterControls.Move.performed += onMovementInput;
+        playerInput.CharacterControls.Move.performed += OnMovementInput;*/
     }
 
-    void onMovementInput(InputAction.CallbackContext context)
+    public void OnMovementInput(InputAction.CallbackContext context)
     {
         currentMovementInput = context.ReadValue<Vector2>();
         currentMovement.x = currentMovementInput.x;
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
     }
 
-    void handleRotation()
+    void HandleRotation()
     {
         Vector3 positionToLookAt;
 
@@ -57,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        handleRotation();
+        HandleRotation();
         characterController.Move(currentMovement * playerSpeed * Time.deltaTime);
     }
 
