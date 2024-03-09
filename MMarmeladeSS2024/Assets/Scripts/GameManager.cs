@@ -56,14 +56,15 @@ public class GameManager : MonoBehaviour
             }
 
             playerReferences = GameObject.FindGameObjectsWithTag("Player");
-
+Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAA");
             for(int i = 0; i < playerCount; i++)
             {
                 playerReferences[i].transform.position = playerSpawns[i];
                 playerReferences[i].GetComponent<PlayerInformation>().playerID = i;
                 playerReferences[i].GetComponent<Animator>().runtimeAnimatorController = playerAnimatorController[i];
+                PointsManager.addPlayer(i);
+                Debug.Log(i);
             }
-            PointsManager.Start();
 		}
     }
 
