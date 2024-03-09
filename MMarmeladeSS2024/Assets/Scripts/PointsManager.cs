@@ -1,25 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using TMPro;
 using UnityEngine;
 
 public static class PointsManager
 {
-    private static Dictionary<int, int> playerPoints;
+    public static Dictionary<int, int> playerPoints{ get; private set; }=new Dictionary<int, int>();
+
     // Start is called before the first frame update
-  public static void Start()
-    {
-        
-    }
+  public static void addPlayer(int playerId)
+  {
+      playerPoints[playerId] = 0;
+
+  }
 
     // Update is called once per frame
-    public static void UpdatePoints(int playerid)
+    public static void UpdatePoints(int playerid,int points)
     {
-        playerPoints[playerid]++;
-        foreach (var VARIABLE in playerPoints)
-        {
-            Debug.Log(VARIABLE.Key+", "+VARIABLE.Value);
-        }
-        Debug.Log("-------------------------------------------------------");
+        playerPoints[playerid]+=points;
+       
     }
+    
 }
