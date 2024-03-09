@@ -6,7 +6,7 @@ using UnityEngine;
 
 public static class PointsManager
 {
-    public static Dictionary<int, int> playerPoints{ get; private set; }
+    public static Dictionary<int, int> playerPoints{ get; private set; }=new Dictionary<int, int>();
 
     // Start is called before the first frame update
   public static void addPlayer(int playerId)
